@@ -1,0 +1,8 @@
+{
+  "name": "jcosta",
+  "version": "1.0.0",
+  "description": "RSS Reader",
+  "main": "index.js",
+  "author": "Jefferson Costa",
+  "license": "MIT"
+}
