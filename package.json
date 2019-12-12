@@ -4,5 +4,8 @@
   "description": "RSS Reader",
   "main": "index.js",
   "author": "Jefferson Costa",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.19.0"
+  }
 }
