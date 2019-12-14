@@ -41,7 +41,15 @@ module.exports = function (ctx) {
       //            (not treeshaking Quasar; biggest bundle size; convenient)
       all: 'auto',
 
-      components: [],
+      components: [
+          'QCard',
+          'QCardSection',
+          'QCardActions',
+          'QInput',
+          'QLayout',
+          'QPageContainer',
+          'QPage'
+      ],
       directives: [],
 
       // Quasar plugins
@@ -70,6 +78,7 @@ module.exports = function (ctx) {
           loader: 'eslint-loader',
           exclude: /node_modules/,
           options: {
+            fix: true,
             formatter: require('eslint').CLIEngine.getFormatter('stylish')
           }
         })

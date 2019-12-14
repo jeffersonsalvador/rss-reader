@@ -1,11 +1,36 @@
 <template>
-  <div id="q-app">
-    <router-view />
-  </div>
+    <div id="q-app">
+        <div id="nav">
+            <router-link v-if="authenticated" to="/login" v-on:click.native="logout()" replace>Logout</router-link>
+        </div>
+        <router-view @authenticated="setAuthenticated" />
+    </div>
 </template>
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  data () {
+    return {
+      authenticated: false,
+      mockAccount: {
+        username: 'nraboy',
+        password: 'password'
+      }
+    }
+  },
+  mounted () {
+    if (!this.authenticated) {
+      this.$router.replace({ name: 'login' })
+    }
+  },
+  methods: {
+    setAuthenticated (status) {
+      this.authenticated = status
+    },
+    logout () {
+      this.authenticated = false
+    }
+  }
 }
 </script>

@@ -1,11 +1,11 @@
 {
   "name": "rss-reader",
   "version": "0.0.1",
-  "description": "A Quasar Framework app",
-  "productName": "Quasar App",
+  "description": "RSS Reader",
+  "productName": "Mintos | RSS Reader",
   "cordovaId": "org.cordova.quasar.app",
   "capacitorId": "",
-  "author": "Jefferson Costa <jefferson.costa@pdmfc.com>",
+  "author": "Jefferson Costa <jeffersonsalvador@gmail.com>",
   "private": true,
   "scripts": {
     "lint": "eslint --ext .js,.vue src",
