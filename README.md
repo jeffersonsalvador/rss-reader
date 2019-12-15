@@ -1,26 +1,30 @@
-# Quasar App (rss-reader)
+# Mintos | RSS Reader
 
-A Quasar Framework app
-
-## Install the dependencies
+Install the dependencies
 ```bash
-yarn
+composer install
 ```
 
-### Start the app in development mode (hot-code reloading, error reporting, etc.)
+Create a table in your database and setup connection
 ```bash
-quasar dev
+Copy the .env.example file to .env and edit database
+```
+```bash
+CREATE TABLE `users` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `email` varchar(255) NOT NULL DEFAULT '',
+  `password` varchar(255) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 ```
 
-### Lint the files
+## Start the API
 ```bash
-yarn run lint
+php -S localhost:3000 -t app
 ```
 
-### Build the app for production
+Open the app in your browser
 ```bash
-quasar build
+/public/index.html
 ```
-
-### Customize the configuration
-See [Configuring quasar.conf.js](https://quasar.dev/quasar-cli/quasar-conf-js).

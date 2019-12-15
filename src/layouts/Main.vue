@@ -5,7 +5,7 @@
                 <q-toolbar-title class="row">
                     <img alt="Quasar logo" src="../assets/mintos-inverted.png">
                     <q-space />
-                    <q-btn icon="power_settings_new" flat dense round class="shadow-0" />
+                    <q-btn v-if="$parent.authenticated" icon="power_settings_new" flat dense round class="shadow-0" v-on:click.native="$parent.logout()" />
                 </q-toolbar-title>
             </q-toolbar>
         </q-header>

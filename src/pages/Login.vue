@@ -6,18 +6,21 @@
             <div class="q-mt-xl card-login">
                 <h1>{{ title[type] }}</h1>
 
-                <q-input bottom-slots v-model="user.email" outlined bg-color="white" label="E-mail">
+                <q-input :rules="[ validMail ]" bg-color="white" bottom-slots label="E-mail" outlined
+                         v-model="user.email"
+                >
                     <template v-slot:prepend>
                         <q-icon name="person"/>
                     </template>
                 </q-input>
-                <q-input bottom-slots v-model="user.password" outlined bg-color="white" label="Password">
+                <q-input type="password" bg-color="white" bottom-slots label="Password" outlined v-model="user.password">
                     <template v-slot:prepend>
                         <q-icon name="person"/>
                     </template>
                 </q-input>
-                <q-btn v-on:click="login()" color="secondary" class="full-width" unelevated>{{ type === 'login' ?
-                    'LOGIN' : 'REGISTER' }}
+                <q-btn class="full-width" color="secondary" unelevated
+                       v-on:click="type === 'login' ? login() : register()">{{ type === 'login' ? 'LOGIN' : 'REGISTER'
+                    }}
                 </q-btn>
 
             </div>
@@ -32,6 +35,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: 'Login',
   props: {
@@ -49,24 +54,64 @@ export default {
       title: {
         login: 'Log in to your account',
         register: 'Create an account'
-      }
+      },
+      message: ''
     }
   },
   methods: {
     login () {
       if (this.user.email !== '' && this.user.password !== '') {
-        /*
-                    if (this.user.email === this.$parent.mockAccount.username && this.input.password === this.$parent.mockAccount.password) {
-                        this.$emit('authenticated', true)
-                        this.$router.replace({name: 'secure'})
-                    } else {
-                        console.log('The username and / or password is incorrect')
-                    }
-                     */
+        // Make a request for a user with a given ID
+        axios.post('/api/login', { email: this.user.email, password: this.user.password })
+          .then(function (response) {
+            if (response.data) {
+              // this.$root.$emit('authenticated', true)
+              this.$router.replace({ name: 'home' })
+            } else {
+              this.message = 'Email or Password invalid.'
+              this.showNotif()
+            }
+          })
       } else {
-        console.log('A username and password must be present')
+        this.message = 'A username and password must be present'
+        this.showNotif()
       }
+    },
+
+    register () {
+      if (this.user.email !== '' && this.user.password !== '') {
+        // Make a request for a user with a given ID
+        axios.post('/api/create', { email: this.user.email, password: this.user.password })
+          .then(function (response) {
+            if (response.data) {
+              this.$root.$emit('authenticated', true)
+              this.$router.replace({ name: 'home' })
+            }
+            return response
+          })
+      } else {
+        this.message = 'A username and password must be present'
+        this.showNotif()
+      }
+    },
+
+    showNotif () {
+      this.$q.notify({
+        message: this.message || 'Cadê a mensagem?',
+        color: 'red',
+        position: 'bottom-right'
+      })
+    },
+
+    validMail (val) {
+      if (this.type === 'register') {
+        return axios.post('/api/validate/email', { email: val }).then((response) => {
+          return response
+        })
+      }
+      return !!val || 'E-mail inválido'
     }
+
   }
 }
 </script>

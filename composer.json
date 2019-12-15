@@ -11,10 +11,12 @@
             "App\\" : "app/"
         },
         "files": [
-            "config/config.php"
+            "app/config/config.php"
         ]
     },
     "require": {
-        "symfony/dotenv": "^4.3"
+        "symfony/dotenv": "^4.3",
+        "miladrahimi/phprouter": "4.*",
+        "illuminate/database": "^6.7"
     }
 }
