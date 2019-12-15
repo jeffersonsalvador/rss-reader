@@ -5,7 +5,8 @@
                 <q-toolbar-title class="row">
                     <img alt="Quasar logo" src="../assets/mintos-inverted.png">
                     <q-space />
-                    <q-btn v-if="$parent.authenticated" icon="power_settings_new" flat dense round class="shadow-0" v-on:click.native="$parent.logout()" />
+                    {{ $parent.authenticated }}
+                    <q-btn v-if="$parent.authenticated" icon="power_settings_new" flat dense round class="shadow-0" v-on:click.native="logout()" />
                 </q-toolbar-title>
             </q-toolbar>
         </q-header>
@@ -24,6 +25,11 @@ export default {
   data () {
     return {
       leftDrawerOpen: false
+    }
+  },
+  methods: {
+    logout () {
+      this.$root.$emit('authenticated', false)
     }
   }
 }

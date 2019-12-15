@@ -20,8 +20,9 @@ class UserController
         endforeach;
         if ($user->save()) {
             return true;
+        } else {
+            return false;
         }
-        return false;
     }
 
     public function hasEmail ($email)

@@ -1,10 +1,5 @@
 <template>
     <div id="q-app">
-        <!--
-        <div id="nav">
-            <router-link v-if="authenticated" to="/login" v-on:click.native="logout()" replace>Logout</router-link>
-        </div>
-        -->
         <router-view @authenticated="setAuthenticated" />
     </div>
 </template>
@@ -21,19 +16,19 @@ export default {
     if (!this.authenticated) {
       this.$router.replace({ name: 'login' })
     }
+    if (this.authenticated) {
+      this.$router.replace({ name: 'home' })
+    }
   },
   methods: {
     setAuthenticated (status) {
       this.authenticated = status
-    },
-    logout () {
-      this.authenticated = false
     }
   },
   beforeMount () {
     this.$root.$on('authenticated', (val) => {
-      console.log('oi, quem fala?')
       this.authenticated = val
+      this.$router.replace('/login')
     })
   }
 }
