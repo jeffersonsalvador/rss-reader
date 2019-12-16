@@ -24,7 +24,7 @@ CREATE TABLE `users` (
 php -S localhost:3000 -t app
 ```
 
-Open the app in your browser
+Open the app
 ```bash
-/public/index.html
+php -S localhost:8080 -t public
 ```
